@@ -64,28 +64,3 @@ claude        # then type /start (or /onboard on first run)
 | `/build` · `/debug` · `/review` · `/math` | Project · guided debugging · code review · math for ML |
 | `/drill` · `/check` · `/interview` | Practice · mastery gate · mock interview |
 | `/solve` · `/status` · `/help` | Escape hatch · where am I · command list |
-
-## Design decisions
-
-- **Stable vs changing separated.** Teaching rules (`framework.md`) rarely change; your profile, roadmap and progress change constantly.
-- **Skills over pasted prompts.** The old fill-in-the-blank templates had inconsistent placeholders and had to be re-pasted. Skills infer inputs from your roadmap and ask only for what's missing.
-- **Progressive loading.** Only the framework is always in context; each skill loads when invoked, which keeps the context small and the instructions sharp.
-- **Evidence-based levels.** The 0–4 mastery scale and strict gates replace "tell me when you get it".
-- **Limitation.** An LLM has no memory between chats. Continuity comes entirely from `learner/progress.md`. Keep it current.
-
-## Migrating from the first version
-
-| Old file | Now |
-|---|---|
-| `1-framework.md` | `framework.md` (profile moved out; lifecycle, gates, state added) + `learner/profile.md` |
-| `2-topic-definition.md`, `3-a-learning-breakdown.md` | `skills/path` (Mode B) and the Contract step |
-| `3-b-session-goal-for-new-topic.md` | `skills/explain` |
-| `3-c-session-goal-for-deeper-topic.md` | `skills/deeper` |
-| `3-d-session-debug.md` | `skills/debug` |
-| `3-e-session-build-project.md`, `5-project-based-learning.md` | `skills/build` |
-| `3-f-session-review.md` | `skills/review` |
-| `3-g-session-math.md` | `skills/math` |
-| `4-active-learning-mode.md` | `framework.md §5` (applies to every session) |
-| `6-knowledge-validation.md` | `skills/drill` |
-| `7-mastery-check.md` | `skills/check` |
-| `8-tech-interview-mode.md` | `skills/interview` |
