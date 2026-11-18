@@ -26,7 +26,7 @@ learner/
   roadmap.md          Where you're going (status: not-set triggers /onboard)
   progress.md         Where you are: mastery, reviews due, session log, misconceptions
 skills/<name>/SKILL.md  One procedure per command, loaded only when used
-scripts/bundle.sh     Builds one pasteable context for chat UIs without file access
+scripts/bundle.sh     Exports Project knowledge files or pasteable context
 ```
 
 ## Setup
@@ -38,13 +38,29 @@ mkdir -p .claude && cp -r skills .claude/skills   # or: ln -s ../skills .claude/
 claude        # then type /start (or /onboard on first run)
 ```
 
-**Claude Projects / ChatGPT Projects**: upload `framework.md`, `learner/*`, and the skills you want as project files. Skills are plain Markdown, so they work as knowledge files, but the model can't edit them, so at the end of a session paste the **Progress Block** from `/close` into `learner/progress.md` yourself.
+**ChatGPT Projects / Claude Projects**
+
+```sh
+./scripts/bundle.sh --project ./project-knowledge onboard path start explain close
+```
+
+Upload the generated Markdown files individually. The export contains an index, the framework, the three learner files, and one distinctly named file per requested skill. Choose the skills you use and add others as needed. Use a new output directory for each export.
+
+Add this to your Project instructions so the model knows which sources to consult:
+
+> Use `00_INDEX.md` to locate the authoritative files. At the start of a learning session, consult the framework and current learner files. Consult the relevant skill when I invoke a command. If a required file is unavailable, ask for it. When coverage matters, cross-check all relevant files and name the sources you consulted.
+
+Project files can be retrieved selectively, so avoid assuming every uploaded file is in context for every turn. After `/close`, paste the **Progress Block** into `learner/progress.md` and replace the uploaded `learner-progress.md` with the updated copy. Keep one current upload for each learner file.
 
 **Any chat, no files**
 
 ```sh
-./scripts/bundle.sh start explain | pbcopy    # paste into a new chat
+./scripts/bundle.sh start explain | pbcopy    # start a new chat with the skills you need
+./scripts/bundle.sh --skills-only math | pbcopy   # add a skill to the same chat later
+./scripts/bundle.sh --state-only | pbcopy         # refresh the learner files in that chat
 ```
+
+If the chat already has the framework and learner files, paste only the skill you need next. Use the full bundle for a new chat or when the earlier context is no longer available. The script prints to stdout, so you can also redirect the output to a file.
 
 ## Daily use
 
