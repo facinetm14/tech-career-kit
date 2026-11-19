@@ -1,0 +1,10 @@
+{
+  "default_tracks": ["learn", "hiring-loop", "screen"],
+  "shared": ["framework.md", "templates/learner/profile.md", "templates/learner/conventions.md", "skills/tck-init/SKILL.md", "skills/tck-export/SKILL.md"],
+  "scopes": {
+    "learn": ["learning.md", "templates/learner/roadmap.md", "templates/learner/progress.md", "skills/tck-onboard/SKILL.md", "skills/tck-path/SKILL.md", "skills/tck-start/SKILL.md", "skills/tck-explain/SKILL.md", "skills/tck-deeper/SKILL.md", "skills/tck-build/SKILL.md", "skills/tck-debug/SKILL.md", "skills/tck-review/SKILL.md", "skills/tck-math/SKILL.md", "skills/tck-drill/SKILL.md", "skills/tck-check/SKILL.md", "skills/tck-interview/SKILL.md", "skills/tck-summary/SKILL.md", "skills/tck-close/SKILL.md"],
+    "hiring-loop": ["skills/tck-hiring-loop/SKILL.md"],
+    "screen": ["skills/tck-resume-screen/SKILL.md"],
+    "job-search": ["skills/tck-job-search/SKILL.md"]
+  }
+}
