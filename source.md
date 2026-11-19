@@ -11,3 +11,4 @@
 - [CanIBeHired](https://canibehired.com/)
 - [Carrières en France](https://careersinfrance.com/emplois)
 - [QuiRecrute](https://quirecrute.fr/)
+- [GetYourJob](https://getyourjob.pro/jobs)
