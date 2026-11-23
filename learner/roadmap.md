@@ -1,46 +1,59 @@
 status: active
 
-# Back-end engineering and applied AI
+# QJFit back-end engineering roadmap
 
-Use QJFit to learn to deliver, operate and evaluate a production feature independently. By **December 31, 2026**, demonstrate scoring with bounded concurrency, recovery without duplicate effects and diagnosis of an unfamiliar incident. Securing a permanent role remains a parallel goal.
+## Goal and strategy
 
-Repository baseline (dev, bde037b7, inspected November 19): PostgreSQL stores shared postings. CV-specific scores are returned through a temporary Redis match ticket. OpenRouter scores batches with up to five concurrent provider calls per request. The role filter uses a stub embedding provider.
+By 26 February 2027, I can independently ship and operate one QJFit back-end feature. A reviewer can run its regression tests, inspect a staging release and recovery drill, and reproduce a query performance comparison. My three-month career target is a permanent back-end role in France. This roadmap covers technical practice.
 
-## Capabilities and starting evidence
+Follow one real request from input through storage to its observable result. Start in QJFit's existing TypeScript stack. Select the request from the repository in session 1. The jobs endpoint used in the interview was hypothetical.
 
-| Capability | Skills involved | Initial evidence |
-|---|---|---|
-| Express a business rule as a constraint | SQL modeling | L3 for choosing a composite unique constraint |
-| Limit concurrent provider calls | Asynchronous scheduling in Node | Guided explanation, independent implementation pending |
-| Preserve each individual result | Error handling and state assertions | Partial diagnostic answer |
-| Replay an operation without duplicating its effect | Business identity, transactions, concurrency | Recognized idempotency, atomicity still to verify |
-| Diagnose an incident | Correlated traces and reproduction | To be assessed |
-| Compare two rankings | Annotation and a top-five metric | Proposed a comparison, evaluation protocol still to test |
+## End-state capabilities and starting evidence
 
-## Phases and checkpoints
+Levels apply to the specific skill sampled. A dash marks a skill awaiting its first practical check.
 
-1. **November 19–29 — understand scoring and bound concurrency.** Trace one posting in the existing code, measure simultaneous calls, then verify ranking, job-to-score association and the effect of a rejected batch. Use a fresh batch and a slow or failing provider stub for the checkpoint.
-2. **November 30–December 13 — make recovery reliable.** Define the identity of an operation, distinguish a replay from an intentional recalculation, and test concurrent and interrupted processing. Exercise replay on the durable job ingestion path and verify the shared postings in PostgreSQL. Check the actual write boundary before choosing a failure injection point.
-3. **December 14–31 — diagnose independently.** Correlate traces with a posting and reproduce its failure. For the final checkpoint, explain the cause of an unfamiliar incident, recover and verify the database state.
-4. **After December — measure the LLM's contribution.** Annotate examples independently of the system. Compare the two top-five rankings, latency and cost. Explain improvements and regressions on held-out examples.
+| By February I can… | Skills and starting evidence |
+|---|---|
+| Specify a feature's observable behavior | HTTP response selection L2 (guided across cases). Tracing a real handler —. |
+| Prevent a regression at the API boundary | Choosing concrete input and assertion L2. Implementing a failing and passing integration test —. |
+| Release a tested revision to staging | CI, release identification and repeatable deployment —. |
+| Find where a failing request breaks | Structured logging, request correlation and endpoint error rates —. |
+| Restore a known-good release and prove recovery | Selected a rollback independently in one scenario. Executing it and verifying the result —. |
+| Diagnose and improve a slow data access path | Choosing a query-plan diagnostic L2. Interpreting actual timings and measuring improvement —. |
+| Defend the feature's design with evidence | Explained one existing cost trade-off independently. Measuring cost, quality or latency and defending a fresh decision —. |
 
-At each phase exit, independently apply the skills practised (L3), then demonstrate transfer of the central capability on the unfamiliar checkpoint case (L4).
+## Now · Phase 1 · Specify and test one real request
 
-## Current sessions
+27 November–10 December, 36 planned hours. Each row is one session. Retain the tests and reproduction commands in the project so a reviewer can repeat the work.
 
-| Session | Type | Definition of done | Estimated time |
-|---|---|---|---|
-| Trace a real posting through the code | /tck-build | Trace one match from the HTTP entry point through scoring to the temporary ticket and its retrieval. Document one observed run. | 2–4 h |
-| Clarify scoring rules | /tck-deeper | Define an attempt, a result and a recalculation in product terms. Write two business examples that distinguish them. | 2 h |
-| Observe current concurrency | /tck-build | Measure peak simultaneous calls on a batch with a provider stub. | 2–4 h |
-| Bound concurrency | /tck-build | Verify the existing per-request limit with more scoring batches than concurrent slots. | 2–4 h |
-| Isolate one failure | /tck-build | Simulate out-of-order responses and one rejected batch. Verify which jobs reach the final ranking. | 2–4 h |
-| Check transfer | /tck-check | Pass on a fresh batch and independently explain when calls start. | 2–4 h |
+| Session | Goal | Type | Done when | Estimated hours |
+|---|---|---|---|---|
+| 1 | Trace a real QJFit request | /tck-build | Run it locally, identify the handler and dependency, and capture an input and expected output. | 2 |
+| 2 | Define the request contract | /tck-deeper | Predict the observable result for a valid input, an invalid input, a missing resource where applicable, and a dependency failure. | 3 |
+| 3 | Build a repeatable test fixture | /tck-build | Run the same request test twice from clean state with deterministic results. | 4 |
+| 4 | Catch a regression | /tck-build | A boundary test fails for the intended reason on a reproducible defect or deliberate local mutation. | 4 |
+| 5 | Correct the behavior | /tck-build | The regression test passes after the change and the existing suite passes. | 4 |
+| 6 | Exercise a dependency failure | /tck-build | Simulate one downstream failure and assert the client-visible contract. | 4 |
+| 7 | Test an unfamiliar input | /tck-drill | Independently select an edge case, predict the result, then check the prediction. | 3 |
+| 8 | Make the proof reproducible | /tck-build | From a clean checkout, run the documented test command and identify the regression it catches. | 4 |
+| 9 | Transfer the test design | /tck-deeper | Design a regression test for a different failure and explain a case the first test would miss. | 4 |
+| 10 | Pass the feature checkpoint | /tck-check | Independently diagnose a fresh contract failure, fix it, and demonstrate that the test catches a variant. | 4 |
 
-First milestone budget: 144 hours over six full weeks, plus 4 hours planned on Thursday, December 31. Allow up to 22 hours for the sessions above, 40 for recovery and 40 for diagnosis and demonstration. The remaining time covers exploration, retries and reviews. Adjust after inspecting the QJFit repository. Evening sessions are optional.
+## Next · Phase 2 · Release and recover in staging
 
-## Next and later
+Weeks 3–6, 84 hours. First run the suite in CI and deploy a revision that can be identified from staging. Then follow a request through logs, establish normal responses and error rates, and rehearse rollback. Checkpoint: introduce a reversible staging failure, diagnose it, restore the previous release and show that a known request returns the expected body and the endpoint error rate recovers. Transfer skill: repeat the verification when a generic health check stays green through the failure.
 
-- Each Sunday, compare available evidence with the criteria and choose the next checkpoint.
-- Practise domain-driven design (DDD) now through shared vocabulary and scoring invariants. Reuse the examples in code, tests and agent instructions. Explore bounded contexts when a term takes on different meanings in two parts of the product. Revisit aggregates when a consistency rule calls for them.
-- After evaluating the LLM, choose between deeper applied AI work and building a first agent based on results and preferences.
+## Later
+
+- **Phase 3, weeks 7–10, 80 hours.** Reproduce a slow query on representative data, locate the costly step using actual timings, change one thing and compare repeated runs. Checkpoint: a reproducible before-and-after comparison with identical results. Transfer skill: explain how the conclusion changes with a different data distribution. If QJFit uses another store, use a small PostgreSQL exercise modeled on its job data.
+- **Phase 4, weeks 11–13, 60 hours.** Ship a fresh change to the feature, diagnose a staged incident and assemble runnable evidence in the public repo. Checkpoint: complete the release and recovery drill independently and defend one measured trade-off. Transfer skill: verify recovery for an unfamiliar failure mode.
+
+## Gates and capacity
+
+Exit each phase when its milestone skills reach L3 (complete a fresh task independently and explain it). Its key skill must reach L4 (handle a new edge case and explain the limits): regression design in phase 1, recovery verification in phase 2, query diagnosis in phase 3, and end-to-end incident recovery in phase 4. Replan at each checkpoint, after two slipped milestones, after two failed checks on one prerequisite, or when the goal changes.
+
+Four hours daily over 13 weeks gives 364 hours. The four phases use 36 + 84 + 80 + 60 = 260 hours. The remaining 104 hours cover spaced retrieval, repeat attempts, setup and schedule variation. Additional weekend availability is optional.
+
+## Not now
+
+Defer new languages, broad cloud certifications and distributed messaging until a feature needs them. Defer changes to the AI ranking architecture until there is a repeatable baseline. Keep application and interview preparation in the separate job-search framework.

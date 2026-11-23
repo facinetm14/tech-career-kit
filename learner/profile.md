@@ -1,11 +1,11 @@
 # Learner Profile
 
 > Updated by `/tck-onboard` and edited by hand. The mentor uses this to pick analogies, difficulty and focus.
-> Last updated: 2026-11-18
+> Last updated: 2026-11-27
 
 ## Who I am
 
-Full-stack developer with a back-end focus and about 2.5 years on B2B product teams in real estate finance and insurance. Seeking a permanent role in France. Personal projects include Tinyè (Go) and QJFit (TypeScript, vector ranking followed by LLM scoring). Career goal: independently operate back-end features in production, then specialize in applied AI or agents.
+Full-stack developer with a back-end focus and about 2.5 years on B2B product teams in real estate finance and insurance. Seeking a permanent role in France. Personal projects include Tinyè (Go) and QJFit (TypeScript, vector ranking followed by LLM scoring). Career goal: independently operate, design, architect, develop, maintain, secure, observe, performance, reliablity, incidence back-end features/software/systems in production, then specialize in applied AI or agents.
 
 ## Solid ground
 
@@ -16,16 +16,42 @@ Full-stack developer with a back-end focus and about 2.5 years on B2B product te
 - Git (daily), Docker (basics), PostgreSQL / MySQL
 
 ## Weak / actively learning
-
-- AI & ML
-- Mathematics (algebra, calculus, probability)
-- Python (rarely used)
-- Go (beginner)
-- DevOps / CI-CD (basics only)
+- Java / Kotlin
+- Python
+- Go
+- Docker
+- DevOps / CI-CD
 - SOLID: detecting **O** (Open/Closed) and **D** (Dependency Inversion) violations in real code
-- Advanced TypeScript generics
+- Advanced TypeScript / Node.js
 - SQL optimization and execution plans
-- System design / distributed systems
+- Architecture Patterns: CQRS, Event SOurcing, Saga pattern, Outbox pattern
+- JWT deep dive (header.payload.signature, signing algos)
+- OWASP Top 10
+- CORS — proper configuration
+- DDD (beginner)
+- Pagination patterns (cursor, offset)
+- Observability: Structured logging (JSON logs)
+
+## No experience / No clue
+- API Security: OpenID Connect, OAuth2 flows (Authorization Code, Client Credentials), Token rotation & revocation strategies
+- Idempotency
+- Data & Storage: indexation, replicas, locking (optimistic, pessimistic)
+- Vector databases (pgvector)
+- PostgreSQL Deeper: Index types (B-tree, GIN, BRIN, partial), Transactions &      isolation levels (READ COMMITTED, SERIALIZABLE...), Connection pooling (pgBouncer), Table partitioning, VACUUM & autovacuum
+- NoSQL (obsolute beginner): MongoDB
+- System design / distributed systems:  Rate limiting strategies, Load balancing (round-robin, least connections), Service discovery, Bulkhead pattern
+- Assync Messaging: queues (Kafka/RabbitMQ, NATS), Pub/Sub pattern, DLQ, At least once vs Exactly once delivery, Consumer groups
+- gRPC & Protocol Buffers
+- RAG, Embeddings
+- Search: Elasticsearch / Typesense basics
+- Eventual consistency vs strong consistency
+- CAP theorem (Consistency, Availability, Partition tolerance)
+- Infrastructure as code (Iac) & cloud (AWS, Azure)
+- Infrastructure: IAM &  least privilege principle,  Secrets management (Vault / AWS Secrets Manager), TLS / mTLS, Network policies, Audit logging
+- Backpressure
+- Two Generals Problem
+- Observability: Distributed tracing (OpenTelemetry),  Metrics (counters, gauges, histograms), Metrics (counters, gauges, histograms),  Prometheus scraping
+- Correlation IDs
 
 ## Use my strengths as bridges
 
@@ -38,20 +64,19 @@ Teach by contrast with TS/JS and patterns I already know, then state explicitly 
 - Quizzes, challenges and exercises to prove I understood.
 - Structured, step by step.
 
-## Schedule
+## Practice constraints and career timing
 
-- Spend 24 hours per week on QJFit and 4 hours on Tinyè, on Friday or Saturday.
-- Spend 90 minutes each day preparing for interviews and 90 minutes applying for jobs. Extra evenings are optional.
-- Sessions last 2–4 hours with flexible start times. At a stopping point, record the evidence obtained, the open question and the next action. Review progress every Sunday.
-- First milestone on December 31, 2026. Generate revision notes on request with `/tck-summary`.
+I can protect four hours daily, with sessions estimated at two to four hours depending on complexity. Actual duration varies. Weekends may allow more. My three-month career target is a permanent back-end role in France. I use a separate framework for job-search preparation. QJFit is public and has not been deployed to production. At work I write automated tests and QA validates releases.
 
-## Calibration on November 18, 2026
+## Calibration notes, 27 November 2026
 
-With documentation or agents, the learner rated Node/TypeScript, SQL, asynchronous processing, testing and LLM integration at 3/3, and deployment and troubleshooting at 1/3. Assess independence through explanations of decisions and fresh exercises.
+Self-ratings use the 0–3 confidence scale. The diagnostic sampled reasoning in conversation.
 
-- SQL: independently chose a composite unique constraint for concurrent invitations. Query plans still need assessment.
-- RabbitMQ: identified idempotency and a stable identifier. Atomic deduplication after a post-commit crash remains to be demonstrated.
-- Node: proposed batching. Needed help with when calls start and how to handle individual failures.
-- Testing: identified the expected HTTP rejection. The mentor supplied the assertion that the database remained unchanged.
-- AI: proposed comparing vector-only ranking with vector ranking followed by an LLM. Practise independent annotation and measurement on a representative dataset.
-- Production troubleshooting: self-rating only, no exercise completed.
+| Skill | Self-rating | Observed evidence |
+|---|---|---|
+| TypeScript API implementation | 3 | Identified 404, 200 and 503. Needed correction from 401 to 400 for a malformed ID. Implementation still needs a fresh coding task. |
+| Regression tests | 3 | Specified the exact malformed input and expected status after prompting. Independent test design and implementation need a fresh case. |
+| Slow SQL queries | 2 | Independently suggested checking the filter index. Reached EXPLAIN ANALYZE with prompting. Reading a real plan remains untested. |
+| Deployment | 2 | Independently proposed routing traffic to the previous version. Needed a worked example to verify user-visible recovery. |
+| Request tracing | 1 | No diagnostic task attempted. |
+| Architectural trade-offs | 3 | Independently explained QJFit's shortlist design and its cost rationale. Recall impact and cost measurements were not tested. |

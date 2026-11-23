@@ -1,30 +1,24 @@
 # Progress
 
-> Updated by `/tck-close`. If the mentor can't write files, it emits a Progress Block: paste it here.
-
 ## Current position
 
-- **Phase / milestone:** QJFit — understand scoring and bound concurrency
-- **Next session:** /tck-build — trace a match request through scoring to its temporary Redis ticket. First 60-minute block: locate the HTTP handoff in code. Resume by tracing one job through scoring and observing ticket retrieval.
+- Phase 1, milestone 1. Trace one real QJFit request.
+- Next session: /tck-build, about two hours.
 
 ## Mastery
 
-| Topic | Milestone | Level (0-4) | Last practiced | Next review | Weak spots |
+| Topic | Milestone | Level (0–4) | Last practiced | Next review | Weak spots |
 |---|---|---|---|---|---|
+| HTTP response selection | Request contract | 2 | 2026-11-27 | 2026-11-28 | Malformed input versus authentication failure |
+| Specifying a regression case | Request contract | 2 | 2026-11-27 | 2026-11-28 | Independently selecting exact input and assertion |
+| Selecting a query diagnostic | Query diagnosis | 2 | 2026-11-27 | 2026-11-28 | Distinguishing estimated from actual timings |
 
 ## Recurring misconceptions
 
-| Misconception | First seen | Times seen | Fixed? |
-|---|---|---|---|
-
 ## Session log
 
-| Date | Goal | Type | Outcome (met / partly / not) | Level changes |
+| Date | Goal | Type | Outcome | Level changes |
 |---|---|---|---|---|
-| 2026-11-18 | Calibration and QJFit roadmap | /tck-onboard + /tck-path | Roadmap activated, first milestone on December 31 | See calibration notes in the profile |
+| 2026-11-27 | Set a technical goal and roadmap | /tck-onboard and /tck-path | Active through 26 February 2027. Begin with the QJFit request contract. | Three guided diagnostic skills recorded at L2. |
 
 ## Parking lot
-
-- (non-urgent tangents and questions; revisit when they match a milestone)
-
-> Reviews due are computed at `/tck-start` from "Next review". Schedule: +1, +3, +7, +21 days after reaching level ≥ 2.

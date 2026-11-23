@@ -11,11 +11,23 @@ python3 scripts/setup.py --workspace ../my-career
 cd ../my-career
 ```
 
-If your CLI needs an entry point, tell it to read `AGENTS.md`.
+CLI setup defaults to Codex and copies the selected tracks’ skills and shared skills into `.agents/skills/`. For Claude Code, run `python3 scripts/setup.py --workspace ../my-career --agent claude` from the cloned repository to install them in `.claude/skills/`. You can run setup again in the same workspace for a second agent. Both agents share the same learner profile and progress.
 
 **Chat.** Send `tck-setup <repository-url>` in a chat project. The agent saves the files or gives you their contents to paste. If it cannot read the repository, paste the output of `python3 scripts/setup.py --paste`.
 
 To install a single track, name it explicitly, e.g. `python3 scripts/setup.py screen --workspace ../my-cv` or `tck-setup <repository-url> screen`.
+
+## Try an interview round
+
+Start with this fictional posting and CV excerpt:
+
+```text
+/tck-hiring-loop
+Posting: Backend engineer maintaining a TypeScript service that processes invoices.
+CV: I added retries to an invoice worker after transient failures delayed payments.
+```
+
+When the recruiter invites you to introduce yourself, describe the invoice incident. A recruiter follow-up might be “Who was affected by the delays, and which part did you own?” In the technical round, the same example opens a different question: “If payment succeeds but the worker crashes before acknowledging the job, what happens on retry?” Exact questions vary. The [interview rules](skills/tck-hiring-loop/SKILL.md) explain how the agent chooses follow-ups and carries evidence between rounds.
 
 ## Tracks and commands
 
